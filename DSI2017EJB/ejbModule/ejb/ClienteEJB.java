@@ -27,5 +27,9 @@ public class ClienteEJB implements ClienteEJBLocal {
 			em.createNamedQuery("todosclientes");
 		return q.getResultList();
 	}
+	@Override
+	public void insert(Cliente cliente) {
+		em.persist(cliente);
+	}
 
 }

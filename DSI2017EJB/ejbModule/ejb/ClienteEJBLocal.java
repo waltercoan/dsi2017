@@ -7,4 +7,5 @@ import model.Cliente;
 @Local
 public interface ClienteEJBLocal {
 	public List<Cliente> todosClientes();
+	public void insert(Cliente cliente);
 }
