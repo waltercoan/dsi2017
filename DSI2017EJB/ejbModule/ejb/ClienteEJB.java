@@ -31,5 +31,21 @@ public class ClienteEJB implements ClienteEJBLocal {
 	public void insert(Cliente cliente) {
 		em.persist(cliente);
 	}
-
+	@Override
+	public Cliente getCliente(long id) {
+		return em.find(Cliente.class, id);
+	}
+	@Override
+	public void remove(long id) {
+		em.remove(em.find(Cliente.class, id));
+	}
+	@Override
+	public void update(long id, Cliente newcliente) {
+		Cliente oldcli = em.find(Cliente.class, id);
+		if (newcliente.getNome() != null){
+			oldcli.setNome(newcliente.getNome());
+		}
+		oldcli.setSexo(newcliente.getSexo());
+		em.merge(oldcli);
+	}
 }

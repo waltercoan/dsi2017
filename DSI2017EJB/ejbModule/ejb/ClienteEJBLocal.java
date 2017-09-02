@@ -8,4 +8,7 @@ import model.Cliente;
 public interface ClienteEJBLocal {
 	public List<Cliente> todosClientes();
 	public void insert(Cliente cliente);
+	public Cliente getCliente(long id);
+	public void remove(long id);
+	public void update(long id, Cliente cliente);
 }
