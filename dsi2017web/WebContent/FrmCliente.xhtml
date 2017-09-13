@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+  	  xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta charset="UTF-8"/>
+		<title>Insert title here</title>
+	</h:head>
+	<body>
+		<h:form>
+			<p:panel header="Lista de Cliente">
+				<p:dataTable var="umcliente" value="#{crtcliente.todosClientes()}">
+					<p:column headerText="Nome">
+				        <h:outputText value="#{umcliente.nome}" />
+				    </p:column>					
+					
+					<p:column headerText="Sexo">
+				        <h:outputText value='#{(umcliente.sexo==0)?"Masculino":"Feminino"}' />
+				    </p:column>
+				    
+				    <f:facet name="footer">
+				    	<p:commandButton value="Incluir" id="cbIncluir" 
+				    		oncomplete="PF('dlg1').show()"/>
+				    </f:facet>
+				    
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+		
+		<h:form>
+			<p:dialog width="500" height="300" id="dtCliente" modal="true"
+				header="Detalhe do Cliente" widgetVar="dlg1">
+			
+			</p:dialog>
+		</h:form>
+		
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
