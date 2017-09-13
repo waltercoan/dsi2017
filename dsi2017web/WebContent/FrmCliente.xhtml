@@ -11,32 +11,30 @@
 	<body>
 		<h:form>
 			<p:panel header="Lista de Cliente">
-				<p:dataTable var="umcliente" value="#{crtcliente.todosClientes()}">
+				<p:dataTable value="#{crtcliente.todosClientes()}"
+						var="umcliente">
 					<p:column headerText="Nome">
-				        <h:outputText value="#{umcliente.nome}" />
-				    </p:column>					
-					
-					<p:column headerText="Sexo">
-				        <h:outputText value='#{(umcliente.sexo==0)?"Masculino":"Feminino"}' />
-				    </p:column>
-				    
-				    <f:facet name="footer">
-				    	<p:commandButton value="Incluir" id="cbIncluir" 
-				    		oncomplete="PF('dlg1').show()"/>
-				    </f:facet>
-				    
+        				<h:outputText value="#{umcliente.nome}" />
+    				</p:column>
+    				<p:column headerText="Sexo">
+        				<h:outputText value='#{(umcliente.sexo==1)?"Masculino":"Femino"}' />
+    				</p:column>
+					<f:facet name="footer">
+						<p:commandButton value="Incluir" id="cbIncluir"
+							oncomplete="PF('dlg1').show()"/>
+					</f:facet>
 				</p:dataTable>
 			</p:panel>
 		</h:form>
 		
-		<h:form>
-			<p:dialog width="500" height="300" id="dtCliente" modal="true"
+		<h:form id="form">
+			<p:dialog width="500" height="300" id="detailCliente" modal="true"
 				header="Detalhe do Cliente" widgetVar="dlg1">
-			
+				<h:panelGrid id="formDetail" columns="2">
+				
+				</h:panelGrid>
 			</p:dialog>
 		</h:form>
-		
-		
 	</body>
 </html>
 
