@@ -48,4 +48,16 @@ public class ClienteEJB implements ClienteEJBLocal {
 		oldcli.setSexo(newcliente.getSexo());
 		em.merge(oldcli);
 	}
+	@Override
+	public void save(Cliente cliente) {
+		if(em.find(Cliente.class, 
+				cliente.getId()) == null){
+			//insert
+			em.persist(cliente);
+		}else{
+			//update
+			em.merge(cliente);
+		}
+		
+	}
 }

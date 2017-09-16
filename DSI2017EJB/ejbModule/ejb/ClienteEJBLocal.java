@@ -11,4 +11,5 @@ public interface ClienteEJBLocal {
 	public Cliente getCliente(long id);
 	public void remove(long id);
 	public void update(long id, Cliente cliente);
+	public void save(Cliente cliente);
 }

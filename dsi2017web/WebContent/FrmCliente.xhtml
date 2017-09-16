@@ -9,9 +9,9 @@
 		<title>Insert title here</title>
 	</h:head>
 	<body>
-		<h:form>
+		<h:form id="formtable">
 			<p:panel header="Lista de Cliente">
-				<p:dataTable value="#{crtcliente.todosClientes()}"
+				<p:dataTable id="table" value="#{crtcliente.todosClientes()}"
 						var="umcliente">
 					<p:column headerText="Nome">
         				<h:outputText value="#{umcliente.nome}" />
@@ -21,7 +21,8 @@
     				</p:column>
 					<f:facet name="footer">
 						<p:commandButton value="Incluir" id="cbIncluir"
-							oncomplete="PF('dlg1').show()"/>
+							oncomplete="PF('dlg1').show()" action="#{crtcliente.insert()}"
+							update=":form:formDetail"/>
 					</f:facet>
 				</p:dataTable>
 			</p:panel>
@@ -31,7 +32,19 @@
 			<p:dialog width="500" height="300" id="detailCliente" modal="true"
 				header="Detalhe do Cliente" widgetVar="dlg1">
 				<h:panelGrid id="formDetail" columns="2">
-				
+					<h:outputLabel value="Nome"/>
+					<p:inputText value="#{crtcliente.model.nome}"/>
+					<h:outputLabel value="Sexo"/>
+					<p:inputText value="#{crtcliente.model.sexo}"/>
+					
+					<p:commandButton value="OK"
+						id="cbOK" onsuccess="PF('dlg1').hide()"
+						action="#{crtcliente.save()}" update=":formtable:table"/>
+						
+					<p:commandButton value="Cancelar"
+						id="cbCancelar" onsuccess="PF('dlg1').hide()"/>
+					
+					
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
