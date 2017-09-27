@@ -28,7 +28,9 @@ public class CrtCliente {
 	public void save(){
 		clienteEJB.save(model);
 	}
-	
+	public void remove(){
+		clienteEJB.remove(model.getId());
+	}
 	
 
 	public List<Cliente> todosClientes(){

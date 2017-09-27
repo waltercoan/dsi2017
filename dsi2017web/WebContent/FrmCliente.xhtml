@@ -12,7 +12,8 @@
 		<h:form id="formtable">
 			<p:panel header="Lista de Cliente">
 				<p:dataTable id="table" value="#{crtcliente.todosClientes()}"
-						var="umcliente">
+				selectionMode="single" selection="#{crtcliente.model}"
+				rowKey="#{umcliente.id}" var="umcliente">
 					<p:column headerText="Nome">
         				<h:outputText value="#{umcliente.nome}" />
     				</p:column>
@@ -23,6 +24,12 @@
 						<p:commandButton value="Incluir" id="cbIncluir"
 							oncomplete="PF('dlg1').show()" action="#{crtcliente.insert()}"
 							update=":form:formDetail"/>
+							
+						<p:commandButton value="Alterar" id="cbAlterar"
+							oncomplete="PF('dlg1').show()" update=":form:formDetail"/>
+							
+						<p:commandButton value="Excluir" id="cbExcluir"
+							oncomplete="PF('dlgRemove').show()" update=":form:formDetail"/>
 					</f:facet>
 				</p:dataTable>
 			</p:panel>
@@ -44,6 +51,23 @@
 					<p:commandButton value="Cancelar"
 						id="cbCancelar" onsuccess="PF('dlg1').hide()"/>
 					
+					
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		
+		
+		<h:form id="formRemove">
+			<p:dialog width="500" height="50" id="removeCliente" modal="true"
+				header="Confirma exclusão do Cliente?" widgetVar="dlgRemove">
+				<h:panelGrid columns="2">
+					<p:commandButton value="OK"
+						id="cbRemOK" onsuccess="PF('dlgRemove').hide()"
+						action="#{crtcliente.remove()}" update=":formtable:table"/>
+						
+					<p:commandButton value="Cancelar"
+						id="cbRemCancelar" onsuccess="PF('dlgRemove').hide()"
+						update=":formtable:table"/>
 					
 				</h:panelGrid>
 			</p:dialog>
