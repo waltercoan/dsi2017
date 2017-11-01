@@ -6,12 +6,14 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ejb.ClienteEJBLocal;
@@ -20,37 +22,46 @@ import model.Cliente;
 @Path("/cliente")
 @RequestScoped
 public class ClienteAPI {
-	
+
 	@EJB
 	private ClienteEJBLocal clienteEJB;
-	
+
 	@GET
 	@Produces("application/json")
 	public List<Cliente> getClientes(){
 		return clienteEJB.todosClientes();
 	}
 	
+	@POST
+	@Path("/signup")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public void signup(@FormParam("email") String email, 
+			              @FormParam("password") String password, 
+			              @FormParam("name") String name){
+		System.out.println(String.format("%s %s %s", name, password, email));
+	}
+
 	@GET
 	@Path("/{id}")
 	@Produces("application/json")
 	public Cliente getCliente(@PathParam("id") long id){
 		return clienteEJB.getCliente(id);
 	}
-	
+
 	@DELETE
 	@Path("/{id}")
 	@Produces("application/json")
 	public void removeCliente(@PathParam("id") long id){
 		clienteEJB.remove(id);
 	}
-	
+
 	@PUT
 	@Path("/{id}")
 	@Consumes("application/json")
 	public void updateCliente(@PathParam("id") long id, Cliente cliente){
 		clienteEJB.update(id, cliente);
 	}
-	
+
 	@POST
 	@Path("/colecao")
 	@Consumes("application/json")
@@ -77,11 +88,11 @@ public class ClienteAPI {
 			return Response.serverError().build();
 		}
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }
 
 
